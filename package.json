@@ -1,11 +1,24 @@
 {
   "name": "vue-project-manager",
   "displayName": "Vue Project Manager",
-  "description": "Vue Project Manager VSCodeExt",
+  "description": "Vue项目管理器",
+  "author": "AmazingPromise <907953320@qq.com>",
   "version": "0.0.1",
+  "publisher": "hcl2020",
   "engines": {
     "vscode": "^1.52.0"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hcl2020/vue-project-manager"
+  },
+  "keywords": [
+    "vetur",
+    "vue",
+    "vuejs",
+    "project",
+    "manager"
+  ],
   "categories": [
     "Other"
   ],
