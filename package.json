@@ -4,7 +4,7 @@
   "description": "Vue项目管理器",
   "author": "AmazingPromise <907953320@qq.com>",
   "version": "0.0.1",
-  "publisher": "hcl2020",
+  "publisher": "AmazingPromise",
   "engines": {
     "vscode": "^1.52.0"
   },
@@ -23,6 +23,8 @@
     "Other"
   ],
   "activationEvents": [
+    "*",
+    "onView:projectTreeView",
     "onCommand:vue-project-manager.helloWorld"
   ],
   "main": "./dist/extension.js",
@@ -31,10 +33,35 @@
       {
         "command": "vue-project-manager.helloWorld",
         "title": "Hello World"
+      },
+      {
+        "command": "projectTreeView.refreshEntry",
+        "title": "刷新",
+        "icon": "$(refresh)"
       }
-    ]
+    ],
+    "views": {
+      "explorer": [
+        {
+          "id": "projectTreeView",
+          "name": "Vue项目管理器",
+          "icon": "$(project)",
+          "visibility": "visible"
+        }
+      ]
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "projectTreeView.refreshEntry",
+          "when": "view == projectTreeView",
+          "group": "navigation"
+        }
+      ]
+    }
   },
   "scripts": {
+    "package-vsix": "npx vsce package",
     "vscode:prepublish": "yarn run package",
     "compile": "webpack --config ./build/node-extension.webpack.config.js",
     "watch": "webpack --watch --config ./build/node-extension.webpack.config.js",
