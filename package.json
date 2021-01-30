@@ -5,6 +5,7 @@
   "author": "AmazingPromise <907953320@qq.com>",
   "version": "0.0.1",
   "publisher": "AmazingPromise",
+  "icon": "resources/logo.png",
   "engines": {
     "vscode": "^1.52.0"
   },
@@ -25,15 +26,11 @@
   "activationEvents": [
     "*",
     "onView:projectTreeView",
-    "onCommand:vue-project-manager.helloWorld"
+    "onCommand:projectTreeView.refreshEntry"
   ],
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
-      {
-        "command": "vue-project-manager.helloWorld",
-        "title": "Hello World"
-      },
       {
         "command": "projectTreeView.refreshEntry",
         "title": "刷新",
