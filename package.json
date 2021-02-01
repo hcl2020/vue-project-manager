@@ -4,7 +4,7 @@
   "description": "Vue项目管理器",
   "author": "AmazingPromise <907953320@qq.com>",
   "version": "0.0.1",
-  "publisher": "AmazingPromise",
+  "publisher": "hcl2020",
   "icon": "resources/logo.png",
   "engines": {
     "vscode": "^1.52.0"
@@ -26,13 +26,13 @@
   "activationEvents": [
     "*",
     "onView:projectTreeView",
-    "onCommand:projectTreeView.refreshEntry"
+    "onCommand:vpm.refreshEntry"
   ],
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "projectTreeView.refreshEntry",
+        "command": "vpm.refreshEntry",
         "title": "刷新",
         "icon": "$(refresh)"
       }
@@ -44,13 +44,19 @@
           "name": "Vue项目管理器",
           "icon": "$(project)",
           "visibility": "visible"
+        },
+        {
+          "id": "nodeDependenciesTreeView",
+          "name": "node 依赖项浏览器",
+          "icon": "$(project)",
+          "visibility": "visible"
         }
       ]
     },
     "menus": {
       "view/title": [
         {
-          "command": "projectTreeView.refreshEntry",
+          "command": "vpm.refreshEntry",
           "when": "view == projectTreeView",
           "group": "navigation"
         }

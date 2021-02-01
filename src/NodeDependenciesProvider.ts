@@ -39,7 +39,8 @@ export class NodeDependenciesProvider implements vscode.TreeDataProvider<Depende
 
       const toDep = (moduleName: string, version: string): Dependency => {
         if (this.pathExists(path.join(this.workspaceRoot, 'node_modules', moduleName))) {
-          return new Dependency(moduleName, version, vscode.TreeItemCollapsibleState.Collapsed);
+          let packageJsonUri = vscode.Uri.file(path.join(this.workspaceRoot, 'node_modules', moduleName));
+          return new Dependency(moduleName, version, vscode.TreeItemCollapsibleState.Collapsed, packageJsonUri);
         } else {
           return new Dependency(moduleName, version, vscode.TreeItemCollapsibleState.None);
         }
@@ -81,15 +82,11 @@ class Dependency extends vscode.TreeItem {
   constructor(
     public readonly label: string,
     private version: string,
-    public readonly collapsibleState: vscode.TreeItemCollapsibleState
+    public readonly collapsibleState: vscode.TreeItemCollapsibleState,
+    public readonly resourceUri?: vscode.Uri
   ) {
     super(label, collapsibleState);
     this.tooltip = `${this.label}-${this.version}`;
     this.description = this.version;
   }
-
-  //   iconPath = {
-  //     light: path.join(__filename, '..', '..', 'resources', 'light', 'dependency.svg'),
-  //     dark: path.join(__filename, '..', '..', 'resources', 'dark', 'dependency.svg'),
-  //   };
 }
