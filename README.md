@@ -1,64 +1,72 @@
-# vue-project-manager
+<p>
+  <h1 align="center">Vue Project Manager 项目管理器</h1>
+</p>
+
+<p align="center">
+  <a href="https://github.com/hcl2020/vue-project-manager">
+    <img src="https://img.shields.io/github/issues/hcl2020/vue-project-manager?color=06c&logo=github&logoColor=white&style=flat-square">
+  </a>
+ 
+  <a href="https://marketplace.visualstudio.com/items?itemName=hcl2020.vue-project-manager">
+    <img src="https://vsmarketplacebadge.apphb.com/version-short/hcl2020.vue-project-manager.svg?style=flat-square&color=06c">
+  </a>
+  <a href="https://marketplace.visualstudio.com/items?itemName=hcl2020.vue-project-manager">
+    <img src="https://vsmarketplacebadge.apphb.com/installs-short/hcl2020.vue-project-manager.svg?style=flat-square&color=06c">
+  </a>
+  <a href="https://marketplace.visualstudio.com/items?itemName=hcl2020.vue-project-manager">
+    <img src="https://vsmarketplacebadge.apphb.com/rating-star/hcl2020.vue-project-manager.svg?style=flat-square&color=06c">
+  </a>
+  <br>
+</p>
 
 Vue Project tooling for VS Code.
+
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
-
-For example if there is an image subfolder under your extension project workspace:
-
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
-
-## Requirements
-
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+- 自定义项目视图 ❌
+  - 自定义虚拟目录结构 ✔️
+  - 自定义文件名格式 ❌
+  - 文件名前缀分组 ❌
+- node_modules 依赖管理/跳转 ❌
+- Vue 组件快速跳转/补全 ❌
+  - css ❌
+  - className ❌
+  - components ❌
+  - assets ❌
+- 项目目标进度管理 ❌
 
 ## Extension Settings
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+Example `vue.project.config.js`
 
-For example:
-
-This extension contributes the following settings:
-
-- `myExtension.enable`: enable/disable this extension
-- `myExtension.thing`: set to `blah` to do something
+```javascript
+module.exports = {
+  folders: [
+    { name: 'Root', path: '.' },
+    {
+      name: 'Pages',
+      folders: ['cms', 'live', 'user'].map((name) => ({
+        name,
+        path: `src/Pages/${name}`,
+        folders: [{ name: 'PageComponents', path: `src/PageComponents/${name}` }],
+      })),
+    },
+  ],
+};
+```
 
 ## Known Issues
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+See [Issues](https://github.com/hcl2020/vue-project-manager/issues).
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
+See [Release](https://github.com/hcl2020/vue-project-manager/releases)
 
-### 1.0.0
+### 0.0.1
 
-Initial release of ...
+Initial release of Alpha.
 
-### 1.0.1
+### 0.0.2
 
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Working with Markdown
-
-**Note:** You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-- Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-- Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-- Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
-
-### For more information
-
-- [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-- [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+Initial release of Beta.
