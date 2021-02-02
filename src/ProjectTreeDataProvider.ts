@@ -1,9 +1,13 @@
-import { TreeDataProvider, TreeItem, TreeItemCollapsibleState, Uri, workspace, FileType } from 'vscode';
+import { TreeDataProvider, TreeItem, TreeItemCollapsibleState, Uri, workspace, FileType, EventEmitter } from 'vscode';
 
-interface IConfig {
+export interface IConfig {
+  folders: IConfigFolder[];
+}
+
+interface IConfigFolder {
   name: string;
   path?: string;
-  folders?: IConfig[];
+  folders?: IConfigFolder[];
 }
 
 interface IElement {
@@ -11,7 +15,7 @@ interface IElement {
   tooltip: string;
   hasChildren: boolean;
   resourceUri?: Uri;
-  children?: IConfig[];
+  children?: IConfigFolder[];
 }
 
 export class ProjectTreeDataProvider implements TreeDataProvider<IElement> {
@@ -21,10 +25,17 @@ export class ProjectTreeDataProvider implements TreeDataProvider<IElement> {
   // getParent?(element: T): ProviderResult<T>;
   // resolveTreeItem?(item: TreeItem, element: T): ProviderResult<TreeItem>;
 
-  constructor(private rootPath: string, private config: { folders: IConfig[] }) {}
+  constructor(private rootPath: string, private config: IConfig) {}
+
+  refreshEvent = new EventEmitter<IElement | undefined | null | void>();
+  onDidChangeTreeData = this.refreshEvent.event;
+
+  refresh(config: IConfig): void {
+    this.config = config;
+    this.refreshEvent.fire();
+  }
 
   async getChildren(element?: IElement): Promise<IElement[]> {
-    console.log('getChildren----', element);
     let realFiles = element?.resourceUri
       ? (await this.loadDirectory(element.resourceUri)).map(({ name, resourceUri, hasChildren }) => ({
           name,
@@ -35,8 +46,6 @@ export class ProjectTreeDataProvider implements TreeDataProvider<IElement> {
       : [];
 
     let children = (element ? element.children : this.config.folders) || [];
-
-    console.log('children----', this.config, children);
 
     let virtualFiles = children.map(({ name, ...item }) => {
       return {
@@ -75,6 +84,13 @@ export class ProjectTreeDataProvider implements TreeDataProvider<IElement> {
     );
     item.label = element.name;
     item.tooltip = element.tooltip;
+    if (!element.hasChildren) {
+      item.command = {
+        title: 'this.label',
+        command: 'vscode.open',
+        arguments: [element.resourceUri],
+      };
+    }
     return item;
   }
 }
@@ -86,11 +102,6 @@ export class ProjectTreeItem extends TreeItem {
     } else {
       super(resourceUri, collapsibleState);
     }
-    this.contextValue = 'folder';
-    this.command = {
-      title: 'this.label',
-      command: 'vpm.refreshEntry',
-      arguments: [this.resourceUri, this.label],
-    };
+    // this.contextValue = 'folder';
   }
 }

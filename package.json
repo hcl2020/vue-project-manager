@@ -3,7 +3,7 @@
   "displayName": "Vue Project Manager",
   "description": "Vue项目管理器",
   "author": "AmazingPromise <907953320@qq.com>",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "publisher": "hcl2020",
   "icon": "resources/logo.png",
   "engines": {
@@ -25,40 +25,72 @@
   ],
   "activationEvents": [
     "*",
-    "onView:projectTreeView",
-    "onCommand:vpm.refreshEntry"
+    "onCommand:vpm.refreshProject"
   ],
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "vpm.refreshEntry",
+        "category": "Vue项目管理器",
+        "command": "vpm.refreshProject",
         "title": "刷新",
         "icon": "$(refresh)"
       }
     ],
     "views": {
-      "explorer": [
+      "vpm-explorer": [
         {
           "id": "projectTreeView",
-          "name": "Vue项目管理器",
-          "icon": "$(project)",
+          "name": "文件夹",
+          "icon": "$(symbol-folder)",
           "visibility": "visible"
         },
         {
           "id": "nodeDependenciesTreeView",
-          "name": "node 依赖项浏览器",
-          "icon": "$(project)",
-          "visibility": "visible"
+          "name": "依赖",
+          "icon": "$(symbol-function)",
+          "visibility": "collapsed"
+        },
+        {
+          "id": "welcomeView",
+          "name": "说明",
+          "icon": "$(question)",
+          "visibility": "collapsed"
         }
       ]
     },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "vpm-explorer",
+          "title": "Vue项目管理器",
+          "icon": "$(rocket)"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "welcomeView",
+        "contents": "Vue项目管理器 [learn more](https://marketplace.visualstudio.com/items?itemName=hcl2020.vue-project-manager).\n[刷新](command:vpm.refreshProject)"
+      }
+    ],
     "menus": {
       "view/title": [
         {
-          "command": "vpm.refreshEntry",
+          "command": "vpm.refreshProject",
           "when": "view == projectTreeView",
           "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "group": "inline",
+          "command": "vpm.refreshProject",
+          "when": "view == projectTreeView"
+        },
+        {
+          "command": "vpm.refreshProject",
+          "when": "view == projectTreeView"
         }
       ]
     }
