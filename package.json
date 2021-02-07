@@ -3,7 +3,7 @@
   "displayName": "Vue Project Manager",
   "description": "Vue项目管理器",
   "author": "AmazingPromise <907953320@qq.com>",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "publisher": "hcl2020",
   "icon": "resources/logo.png",
   "engines": {
