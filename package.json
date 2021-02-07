@@ -24,8 +24,7 @@
     "Other"
   ],
   "activationEvents": [
-    "*",
-    "onCommand:vpm.refreshProject"
+    "workspaceContains:*"
   ],
   "main": "./dist/extension.js",
   "contributes": {
@@ -33,6 +32,12 @@
       {
         "category": "Vue项目管理器",
         "command": "vpm.refreshProject",
+        "title": "刷新",
+        "icon": "$(refresh)"
+      },
+      {
+        "category": "创建项目配置文件",
+        "command": "vpm.createConfigFile",
         "title": "刷新",
         "icon": "$(refresh)"
       }
@@ -50,12 +55,6 @@
           "name": "依赖",
           "icon": "$(symbol-function)",
           "visibility": "collapsed"
-        },
-        {
-          "id": "welcomeView",
-          "name": "说明",
-          "icon": "$(question)",
-          "visibility": "collapsed"
         }
       ]
     },
@@ -70,8 +69,8 @@
     },
     "viewsWelcome": [
       {
-        "view": "welcomeView",
-        "contents": "Vue项目管理器 [learn more](https://marketplace.visualstudio.com/items?itemName=hcl2020.vue-project-manager).\n[刷新](command:vpm.refreshProject)"
+        "view": "projectTreeView",
+        "contents": "Vue项目管理器 [了解更多](https://marketplace.visualstudio.com/items?itemName=hcl2020.vue-project-manager).\n[创建配置文件以启用管理器](command:vpm.createConfigFile)"
       }
     ],
     "menus": {
