@@ -21,10 +21,13 @@
 
 Vue Project tooling for VS Code.
 
+用于辅助管理具有大量组件、子项目、子模块和深层次目录结构的大型项目。在不重构原有项目的前提下重新组织文件目录结构，方便开发时快速查找和跳转代码。
+
 ## Features
 
 - 自定义项目视图 ❌
   - 自定义虚拟目录结构 ✔️
+  - 文件实时筛选过滤 ❌
   - 自定义文件名格式 ❌
   - 文件名前缀分组 ❌
 - node_modules 依赖管理/跳转 ❌
@@ -70,3 +73,7 @@ Initial release of Alpha.
 ### 0.0.2
 
 Initial release of Beta.
+
+### 0.1.0
+
+Initial release of Beta.1
